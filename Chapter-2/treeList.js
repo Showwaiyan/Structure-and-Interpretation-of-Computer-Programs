@@ -41,6 +41,22 @@ function map(fun,x) {
             fun(x) : pair(map(fun,head(x)),map(fun,tail(x)));
 }
 
+function isOdd(x) {
+   return x % 2 !== 0;
+}
+
+function squares(x) {
+    return x**2;
+}
+
+function sumOddSquares(x) {
+    return isNull(x) ?
+        null : !isPair(x) ?
+            isOdd(x) ? squares(x) : 0
+            : sumOddSquares(head(x)) + sumOddSquares(tail(x));
+}
+
 const x = pair(pair(1,2),pair(3,4))
 console.log(countLeaves(x));
 console.log(map(x=>x*2,x));
+console.log(sumOddSquares(x))
