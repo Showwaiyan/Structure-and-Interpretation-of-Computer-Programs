@@ -47,6 +47,17 @@ function map(fun, items) {
     return isNull(items) ? null : pair(fun(head(items)),map(fun,tail(items)));
 }
 
+function fliter(predicate,sequence) {
+    return isNull(sequence)?
+        null : predicate(head(sequence))?
+            pair(head(sequence), fliter(predicate,tail(sequence))) : fliter(predicate,tail(sequence));
+}
+
+function accumulate(op,intial,sequence) {
+    return isNull(sequence)?
+        intial : op(head(sequence),accumulate(op,intial,tail(sequence)));
+}
+
 
 // Testing
 const squares = pair(1,
@@ -78,3 +89,6 @@ console.log(odd);
 console.log(reverse(odd,null));
 
 console.log(map(x=>x*2,odd));
+console.log(fliter((x)=>x%2!==0,squares));
+
+console.log(accumulate((x,y)=>x+y,0,odd));
